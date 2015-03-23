@@ -19,6 +19,16 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.contentSecurityPolicy = {
+    'default-src': "'none'",
+    'script-src': "'self' 'unsafe-eval' 192.168.56.102:35729",
+    'font-src': "'self'",
+    'connect-src': "'none' ws://192.168.56.102:35729 api.myfab5.com",
+    'img-src': "'self'",
+    'style-src': "'self'",
+    'media-src': "'self'"
+  };
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
