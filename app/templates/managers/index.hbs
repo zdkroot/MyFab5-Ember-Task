@@ -1,0 +1,38 @@
+<table class="table table-striped">
+<thead>
+    <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+</thead>
+
+{{#each person in model itemController="manager"}}
+    <tr {{action 'editManager' on="doubleClick"}}>
+    {{#if person.isEditing }}
+        <td>{{input type="text" name="name" value=person.name}}</td>
+        <td>{{input type="text" name="email" value=person.email}}</td>
+        <td>{{view 'select' content=roles}}
+        </td><td>
+            <button {{action 'saveManager'}}>Save</button>
+            <button {{action 'deleteManager'}}>Delete</button>
+        </td>
+    {{else}}
+        <td>{{#link-to 'managers.manager' person}} {{person.name}} {{/link-to}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.role}}</td>
+    {{/if}}
+    </tr>
+{{/each}}
+</table>
+{{#if creatingNewManager}}
+<div id="new">
+    {{input type="text" name=name value=name}}
+    {{input tyle="text" name=email value=email}}
+    {{view "select"
+        content=roles
+        value=newManagerRole
+        selection=newManagerRole
+    }}
+    <button {{action 'toggleCreateManager'}}>Cancel</button>
+    <button {{action 'newManager'}}>Add</button>
+</div>
+{{else}}
+<button {{action 'toggleCreateManager'}}>New Manager</button>
+{{/if}}

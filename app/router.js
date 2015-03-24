@@ -6,8 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('managers');
-  this.route('manager');
+  this.resource('managers', {path: '/managers/'}, function() {
+      this.route('manager', {path: '/:manager_id'});
+  });
 });
 
 export default Router;
